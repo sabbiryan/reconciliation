@@ -1,13 +1,19 @@
 ﻿@page "/reconciliation"
 
+@inject IModalService Modal
 @using ReconciliationApp.Web.Data
 @using ReconciliationApp.Service.Reconciliations.Dtos
 
 @inject ReconciliationService ReconciliationService
 
-    <h4>Reconciliations</h4>
+<h4>
+    Reconciliations
 
-    <p>All reconciliations.</p>
+    <button @onclick="ShowModal" class="btn btn-primary float-right">Create A New Reconciliation</button>
+
+</h4>
+
+<p>All reconciliations.</p>
 
 @if (items == null)
 {
@@ -45,4 +51,6 @@ else
     {
         items = await ReconciliationService.GetListAsync();
     }
+
+    void ShowModal() => Modal.Show<Confirm>("Welcome to Blazored Modal");
 }
