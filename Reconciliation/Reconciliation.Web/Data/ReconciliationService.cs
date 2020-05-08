@@ -4,7 +4,7 @@ using ReconciliationApp.Service.Reconciliations.Dtos;
 
 namespace ReconciliationApp.Web.Data
 {
-    public class ReconciliationService
+    public class ReconciliationService: EndpointServiceBase
     {
         private readonly IReconciliationLogicService _reconciliationService;
         public ReconciliationService(IReconciliationLogicService reconciliationService)
@@ -19,5 +19,25 @@ namespace ReconciliationApp.Web.Data
             return result.ToArray();
         }
 
+        public async Task CreateAsync(ReconciliationCreateDto model)
+        {
+            await _reconciliationService.CreateAsync(model);
+        }
+
+
+        public async Task<ReconciliationCreateDto> GetForEditAsync(string id)
+        {
+            var reconciliationDto = await _reconciliationService.GetAsync(id);
+
+            var map = Mapper.Map<ReconciliationCreateDto>(reconciliationDto);
+
+            return map;
+        }
+
+
+        public async Task EditAsync(ReconciliationCreateDto model)
+        {
+            await _reconciliationService.EditAsync(model);
+        }
     }
 }

@@ -1,15 +1,16 @@
 ﻿@page "/reconciliation"
 
-@inject IModalService Modal
 @using ReconciliationApp.Web.Data
 @using ReconciliationApp.Service.Reconciliations.Dtos
 
+
+@inject IModalService Modal
 @inject ReconciliationService ReconciliationService
 
 <h4>
     Reconciliations
 
-    <button @onclick="ShowModal" class="btn btn-primary float-right">Create A New Reconciliation</button>
+    <button @onclick="(() => ShowModal())" class="btn btn-primary float-right">Create A New Reconciliation</button>
 
 </h4>
 
@@ -28,6 +29,7 @@ else
                 <th>Amount</th>
                 <th>Type</th>
                 <th>Flag</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -38,6 +40,10 @@ else
                     <td>@item.Amount</td>
                     <td>@item?.IncomeOrExpenseType?.DisplayName</td>
                     <td>@item?.IncomeOrExpenseType?.FlagDisplayText</td>
+                    <td>
+                        <a href="javascript:void(0)" @onclick="(() => ShowModal(item.Id))">Edit</a>
+                        <a href="javascript:void(0)" @onclick="(() => Delete(item.Id))">Delete</a>
+                    </td>
                 </tr>
             }
         </tbody>
@@ -52,5 +58,54 @@ else
         items = await ReconciliationService.GetListAsync();
     }
 
-    void ShowModal() => Modal.Show<Confirm>("Welcome to Blazored Modal");
+
+    async Task ShowModal(string id = null)
+    {
+        var parameters = new ModalParameters();
+        parameters.Add(nameof(ReconciliationCreateDto.Id), id);
+
+        var formModal = Modal.Show<ReconciliationForm>(id == null ? "Create a new reconciliation" : "Edit reconciliation", parameters);
+        var result = await formModal.Result;
+
+        if (result.Cancelled)
+        {
+
+        }
+        else
+        {
+            await OnInitializedAsync();
+        }
+    }
+
+    async Task Delete(string id)
+    {
+        //await Swal.FireAsync(new SweetAlertOptions
+        //{
+        //    Title = "Are you sure?",
+        //    Text = "You will not be able to recover this imaginary file!",
+        //    Type = SweetAlertType.Warning,
+        //    ShowCancelButton = true,
+        //    ConfirmButtonText = "Yes, delete it!",
+        //    CancelButtonText = "No, keep it"
+        //}).ContinueWith(swalTask =>
+        //{
+        //    SweetAlertResult result = swalTask.Result;
+        //    if (!string.IsNullOrEmpty(result.Value))
+        //    {
+        //        Swal.FireAsync(
+        //    "Deleted",
+        //    "Your imaginary file has been deleted.",
+        //    SweetAlertType.Success
+        //    );
+        //    }
+        //    else if (result.Dismiss == DismissReason.Cancel)
+        //    {
+        //        Swal.FireAsync(
+        //    "Cancelled",
+        //    "Your imaginary file is safe :)",
+        //    SweetAlertType.Error
+        //    );
+        //    }
+        //});
+    }
 }

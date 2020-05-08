@@ -181,3 +181,8 @@ app {
         display: block;
     }
 }
+
+
+.blazored-modal-wrapper {
+    width: 750px !important;
+}

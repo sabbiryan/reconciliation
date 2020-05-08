@@ -1,0 +1,95 @@
+﻿@using ReconciliationApp.Service.IncomeOrExpenseTypes.Dtos
+@using ReconciliationApp.Service.Reconciliations.Dtos;
+@using ReconciliationApp.Web.Data
+
+@inject Sotsera.Blazor.Toaster.IToaster Toaster
+@inject IncomeOrExpenseTypeService IncomeOrExpenseTypeService
+@inject ReconciliationService ReconciliationService
+@*<div>
+        <p>Please click one of the buttons below to close or cancel the modal.</p>
+
+        <button @onclick="Close" class="btn btn-primary">Close</button>
+        <button @onclick="Cancel" class="btn btn-secondary">Cancel</button>
+    </div>*@
+
+
+<EditForm Model="@model" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+
+    <div class="form-group">
+        <InputSelect class="form-control" @bind-Value="model.IncomeOrExpenseTypeId">
+            <option value="">Please select a type ...</option>
+            @if (types != null)
+            {
+                @foreach (var type in types)
+                {
+                    <option value="@type.Id">@type.DisplayName</option>
+                }
+            }
+        </InputSelect>
+    </div>
+
+    <div class="form-group">
+        <InputDate class="form-control" id="date" @bind-Value="model.Date" />
+    </div>
+
+    <div class="form-group">
+        <InputNumber class="form-control" id="amount" @bind-Value="model.Amount" />
+    </div>
+
+    <div class="form-group float-right">
+        <button @onclick="Cancel" class="btn btn-outline-secondary" type="button">Cancel</button>
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </div>
+</EditForm>
+
+
+@code {
+
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
+    [Parameter] public string Id { get; set; }
+
+
+    private ReconciliationCreateDto model = new ReconciliationCreateDto();
+
+
+    private async Task HandleValidSubmit()
+    {
+        if (Id != null)
+        {
+            await ReconciliationService.EditAsync(model);
+            Toaster.Success("Edited successfully");
+        }
+        else
+        {
+            await ReconciliationService.CreateAsync(model);
+            Toaster.Success("Created successfully");
+        }
+
+        Close();
+    }
+
+    void Close() => BlazoredModal.Close(ModalResult.Ok(true));
+    void Cancel() => BlazoredModal.Cancel();
+
+
+
+
+    private IncomeOrExpenseTypeListDto[] types;
+
+    protected override async Task OnInitializedAsync()
+    {
+        types = await IncomeOrExpenseTypeService.GetListAsync();
+
+        if (Id != null)
+        {
+            model = await ReconciliationService.GetForEditAsync(Id);
+        }
+    }
+
+
+
+
+}

@@ -12,6 +12,7 @@ using ReconciliationApp.Service.IncomeOrExpenses;
 using ReconciliationApp.Service.IncomeOrExpenseTypes;
 using ReconciliationApp.Service.Reconciliations;
 using ReconciliationApp.Web.Data;
+using Sotsera.Blazor.Toaster.Core.Models;
 
 namespace ReconciliationApp.Web
 {
@@ -40,6 +41,13 @@ namespace ReconciliationApp.Web
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddBlazoredModal();
+            services.AddToaster(config =>
+            {
+                //example customizations
+                config.PositionClass = Defaults.Classes.Position.TopRight;
+                config.PreventDuplicates = true;
+                config.NewestOnTop = false;
+            });
 
             services.AddScoped<IIncomeOrExpenseLogicService, IncomeOrExpenseLogicService>();
             services.AddScoped<IIncomeOrExpenseTypeLogicService, IncomeOrExpenseTypeLogicService>();
