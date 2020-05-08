@@ -1,15 +1,13 @@
-﻿@page "/"
-
+﻿@page "/incomeorexpense"
 
 @using ReconciliationApp.Web.Data
-@using ReconciliationApp.Service.Reconciliations.Dtos
+@using ReconciliationApp.Service.IncomeOrExpenses.Dtos
 
-@inject ReconciliationService ReconciliationService
+@inject IncomeOrExpenseService IncomeOrExpenseService
 
-<h4>Yearly Summary</h4>
+<h4>Incomes / Expenses</h4>
 
-<p>View yearly summary of income, expense and reconciliation.</p>
-
+<p>All incomes and expenses.</p>
 
 @if (items == null)
 {
@@ -41,10 +39,10 @@ else
 }
 
 @code {
-    private ReconciliationListDto[] items;
+    private IncomeOrExpenseListDto[] items;
 
     protected override async Task OnInitializedAsync()
     {
-        items = await ReconciliationService.GetListAsync();
+        items = await IncomeOrExpenseService.GetListAsync();
     }
 }

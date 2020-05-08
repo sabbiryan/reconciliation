@@ -47,7 +47,7 @@ namespace ReconciliationApp.EntityFrameworkCore.Migrations
                     DeviceInfo = table.Column<string>(nullable: true),
                     IpAddress = table.Column<string>(nullable: true),
                     IncomeOrExpenseTypeId = table.Column<string>(nullable: true),
-                    DateTime = table.Column<DateTime>(nullable: false),
+                    Date = table.Column<DateTime>(nullable: false),
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
@@ -73,7 +73,7 @@ namespace ReconciliationApp.EntityFrameworkCore.Migrations
                     DeviceInfo = table.Column<string>(nullable: true),
                     IpAddress = table.Column<string>(nullable: true),
                     IncomeOrExpenseTypeId = table.Column<string>(nullable: true),
-                    DateTime = table.Column<DateTime>(nullable: false),
+                    Date = table.Column<DateTime>(nullable: false),
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>

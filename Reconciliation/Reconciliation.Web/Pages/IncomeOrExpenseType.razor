@@ -1,0 +1,46 @@
+﻿@page "/incomeorexpensetype"
+
+@using ReconciliationApp.Web.Data
+@using ReconciliationApp.Service.IncomeOrExpenseTypes.Dtos
+
+@inject IncomeOrExpenseTypeService IncomeOrExpenseTypeService
+
+<h4>Income / Expense Types</h4>
+
+<p>All income and expense types.</p>
+
+@if (items == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Create Date</th>                
+                <th>Name</th>
+                <th>Flag</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in items)
+            {
+                <tr>
+                    <td>@item.CreationTime.ToShortDateString()</td>
+                    <td>@item?.DisplayName</td>
+                    <td>@item?.FlagDisplayText</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private IncomeOrExpenseTypeListDto[] items;
+
+    protected override async Task OnInitializedAsync()
+    {
+        items = await IncomeOrExpenseTypeService.GetListAsync();
+    }
+}

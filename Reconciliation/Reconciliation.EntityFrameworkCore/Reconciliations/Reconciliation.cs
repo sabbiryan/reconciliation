@@ -12,7 +12,7 @@ namespace ReconciliationApp.EntityFrameworkCore.Reconciliations
         [ForeignKey("IncomeOrExpenseTypeId")]
         public IncomeOrExpenseType IncomeOrExpenseType { get; set; }
 
-        public DateTime DateTime { get; set; }
+        public DateTime Date { get; set; }
 
         [Column(TypeName = "decimal(18,2)")]
         public decimal Amount { get; set; }

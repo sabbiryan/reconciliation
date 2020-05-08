@@ -1,15 +1,13 @@
-﻿@page "/"
-
+﻿@page "/reconciliation"
 
 @using ReconciliationApp.Web.Data
 @using ReconciliationApp.Service.Reconciliations.Dtos
 
 @inject ReconciliationService ReconciliationService
 
-<h4>Yearly Summary</h4>
+    <h4>Reconciliations</h4>
 
-<p>View yearly summary of income, expense and reconciliation.</p>
-
+    <p>All reconciliations.</p>
 
 @if (items == null)
 {

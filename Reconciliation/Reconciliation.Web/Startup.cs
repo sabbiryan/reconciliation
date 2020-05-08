@@ -1,3 +1,6 @@
+using System.Reflection;
+using AutoMapper;
+using Blazored.Modal;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -5,6 +8,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ReconciliationApp.EntityFrameworkCore;
+using ReconciliationApp.Service.IncomeOrExpenses;
+using ReconciliationApp.Service.IncomeOrExpenseTypes;
+using ReconciliationApp.Service.Reconciliations;
 using ReconciliationApp.Web.Data;
 
 namespace ReconciliationApp.Web
@@ -27,8 +33,21 @@ namespace ReconciliationApp.Web
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            //var entityFrameworkCoreAssembly = Assembly.Load($"{nameof(ReconciliationApp)}.{nameof(ReconciliationApp.EntityFrameworkCore)}");
+            //var serviceAssembly = Assembly.Load($"{nameof(ReconciliationApp)}.{nameof(ReconciliationApp.Service)}");
+            //services.AddAutoMapper(entityFrameworkCoreAssembly, serviceAssembly);
+
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddBlazoredModal();
+
+            services.AddScoped<IIncomeOrExpenseLogicService, IncomeOrExpenseLogicService>();
+            services.AddScoped<IIncomeOrExpenseTypeLogicService, IncomeOrExpenseTypeLogicService>();
+            services.AddScoped<IReconciliationLogicService, ReconciliationLogicService>();
+
+            services.AddScoped<IncomeOrExpenseService>();
+            services.AddScoped<IncomeOrExpenseTypeService>();
+            services.AddScoped<ReconciliationService>();
             services.AddSingleton<WeatherForecastService>();
         }
 

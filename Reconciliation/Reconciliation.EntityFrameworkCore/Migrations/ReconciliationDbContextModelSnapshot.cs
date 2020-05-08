@@ -9,7 +9,7 @@ using ReconciliationApp.EntityFrameworkCore;
 namespace ReconciliationApp.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(ReconciliationDbContext))]
-    partial class ReconciliationContextModelSnapshot : ModelSnapshot
+    partial class ReconciliationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -77,7 +77,7 @@ namespace ReconciliationApp.EntityFrameworkCore.Migrations
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DateTime")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DeletionTime")
@@ -116,7 +116,7 @@ namespace ReconciliationApp.EntityFrameworkCore.Migrations
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DateTime")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DeletionTime")

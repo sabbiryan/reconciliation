@@ -18,7 +18,7 @@ namespace ReconciliationApp.EntityFrameworkCore.IncomeOrExpenses
         {
             Id = Guid.NewGuid().ToString();
             IncomeOrExpenseTypeId = incomeOrExpenseTypeId;
-            DateTime = date;
+            Date = date;
             Amount = amount;
             CreationTime = date;
         }
@@ -28,7 +28,7 @@ namespace ReconciliationApp.EntityFrameworkCore.IncomeOrExpenses
         public virtual IncomeOrExpenseType IncomeOrExpenseType { get; set; }
 
 
-        public DateTime DateTime { get; set; }
+        public DateTime Date { get; set; }
 
 
         [Column(TypeName = "decimal(18,2)")]

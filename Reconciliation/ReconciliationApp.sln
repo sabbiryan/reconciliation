@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReconciliationApp.EntityFra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReconciliationApp.Service", "Reconciliation.Service\ReconciliationApp.Service.csproj", "{E52CEC91-28C5-49D7-95FB-35918503552A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReconciliationApp.Shared", "Reconciliation.Shared\ReconciliationApp.Shared.csproj", "{278E454A-F494-4B74-8F35-F961D204E78B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{E52CEC91-28C5-49D7-95FB-35918503552A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E52CEC91-28C5-49D7-95FB-35918503552A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E52CEC91-28C5-49D7-95FB-35918503552A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{278E454A-F494-4B74-8F35-F961D204E78B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{278E454A-F494-4B74-8F35-F961D204E78B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{278E454A-F494-4B74-8F35-F961D204E78B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{278E454A-F494-4B74-8F35-F961D204E78B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
