@@ -20,6 +20,7 @@ namespace ReconciliationApp.EntityFrameworkCore.IncomeOrExpenses
             IncomeOrExpenseTypeId = incomeOrExpenseTypeId;
             DateTime = date;
             Amount = amount;
+            CreationTime = date;
         }
 
         public string IncomeOrExpenseTypeId { get; set; }

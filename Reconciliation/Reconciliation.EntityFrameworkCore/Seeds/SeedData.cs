@@ -12,6 +12,7 @@ namespace ReconciliationApp.EntityFrameworkCore.Seeds
         {
             using var context = new ReconciliationDbContext(serviceProvider.GetRequiredService<DbContextOptions<ReconciliationDbContext>>());
 
+
             context.Database.Migrate();
             
 

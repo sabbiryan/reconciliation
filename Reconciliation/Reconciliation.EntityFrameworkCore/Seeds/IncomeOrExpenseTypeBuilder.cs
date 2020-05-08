@@ -7,17 +7,24 @@ namespace ReconciliationApp.EntityFrameworkCore.Seeds
 {
     public static class IncomeOrExpenseTypeBuilder
     {
+        public const string ExpenseType1 = "Expense Type 1";
+        public const string ExpenseType2 = "Expense Type 2";
+        public const string ExpenseType3 = "Expense Type 3";
+        public const string IncomeType1 = "Income Type 1";
+        public const string IncomeType2 = "Income Type 2";
+        public const string IncomeType3 = "Income Type 3";
+
         public static void Build(ReconciliationDbContext context)
         {
             var incomeOrExpenseTypes = new List<IncomeOrExpenseType>()
             {
-                new IncomeOrExpenseType("Expense Type 1", IncomeOrExpenseFlag.Expense),
-                new IncomeOrExpenseType("Expense Type 2", IncomeOrExpenseFlag.Expense),
-                new IncomeOrExpenseType("Expense Type 3", IncomeOrExpenseFlag.Expense),
+                new IncomeOrExpenseType(ExpenseType1, IncomeOrExpenseFlag.Expense),
+                new IncomeOrExpenseType(ExpenseType2, IncomeOrExpenseFlag.Expense),
+                new IncomeOrExpenseType(ExpenseType3, IncomeOrExpenseFlag.Expense),
 
-                new IncomeOrExpenseType("Income Type 1", IncomeOrExpenseFlag.Income),
-                new IncomeOrExpenseType("Income Type 2", IncomeOrExpenseFlag.Income),
-                new IncomeOrExpenseType("Income Type 3", IncomeOrExpenseFlag.Income),
+                new IncomeOrExpenseType(IncomeType1, IncomeOrExpenseFlag.Income),
+                new IncomeOrExpenseType(IncomeType2, IncomeOrExpenseFlag.Income),
+                new IncomeOrExpenseType(IncomeType3, IncomeOrExpenseFlag.Income),
             };
 
             if (!context.IncomeOrExpenseTypes.AsNoTracking().Any())
