@@ -2,6 +2,10 @@
 <img src="https://github.com/sabbiryan/reconciliation/blob/master/Outputs/project-structure.png"/>
 Simple project structure with two clients(will add more clients in future). Clients depends on "ReconcciliationApp.Service" for request and response execution. Which is responsible for core business logics. This client projects are created using Visual Studio Project Templates
 
+### Features
+1. Reconciliation Table Grid
+2. Inline Table Cell Edit
+
 ### Getting Start
 1. Clone the repository
 2. Open on visual studio(2019 recommended)
