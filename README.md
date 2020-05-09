@@ -3,8 +3,9 @@
 Simple project structure with two clients(will add more clients in future). Clients depends on "ReconcciliationApp.Service" for request and response execution. Which is responsible for core business logics. This client projects are created using Visual Studio Project Templates
 
 ### Features
-1. Reconciliation Table Grid
-2. Inline Table Cell Edit (Angular Client Only)
+1. Reconciliation table grid
+2. Inline table cell edit (angular & blazor)
+3. On startup database table delete all rows and ensure tabels has only seed data
 
 ### Technologies
 1. .Net Core 3.1
