@@ -16,9 +16,9 @@ namespace ReconciliationApp.EntityFrameworkCore.Seeds
             context.Database.Migrate();
             
 
-            IncomeOrExpenseTypeBuilder.Build(context);
-            IncomeOrExpenseBuilder.Build(context);
-            ReconciliationBuilder.Build(context);
+            IncomeOrExpenseTypeSeedBuilder.Build(context);
+            IncomeOrExpenseSeedBuilder.Build(context);
+            ReconciliationSeedBuilder.Build(context);
         }
     }
 }

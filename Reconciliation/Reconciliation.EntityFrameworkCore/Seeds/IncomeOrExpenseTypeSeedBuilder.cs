@@ -5,7 +5,7 @@ using ReconciliationApp.EntityFrameworkCore.IncomeOrExpenseTypes;
 
 namespace ReconciliationApp.EntityFrameworkCore.Seeds
 {
-    public static class IncomeOrExpenseTypeBuilder
+    public static class IncomeOrExpenseTypeSeedBuilder
     {
         public const string ExpenseType1 = "Expense Type 1";
         public const string ExpenseType2 = "Expense Type 2";

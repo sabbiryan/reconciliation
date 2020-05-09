@@ -4,6 +4,7 @@ import { IncomeOrExpenseFlag } from "../enums/income-or-expense-flag.enum";
 export class YearlyReconciliationGridDto {
     year: number;
     titles: YearlyReconciliationGridTitleDto[];
+    statements: YearlyReconciliationGridResultDto[];
     rows: YearlyReconciliationGridRowDto[];
     results: YearlyReconciliationGridResultDto[];
 }

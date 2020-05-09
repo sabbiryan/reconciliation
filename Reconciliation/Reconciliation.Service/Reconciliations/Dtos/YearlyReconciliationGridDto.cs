@@ -12,6 +12,7 @@ namespace ReconciliationApp.Service.Reconciliations.Dtos
     {
         public int Year { get; set; }
         public List<YearlyReconciliationGridTitleDto> Titles { get; set; } = new List<YearlyReconciliationGridTitleDto>();
+        public List<YearlyReconciliationGridResultDto> Statements { get; set; } = new List<YearlyReconciliationGridResultDto>();
         public List<YearlyReconciliationGridRowDto> Rows { get; set; } = new List<YearlyReconciliationGridRowDto>();
         public List<YearlyReconciliationGridResultDto> Results { get; set; } = new List<YearlyReconciliationGridResultDto>();
     }

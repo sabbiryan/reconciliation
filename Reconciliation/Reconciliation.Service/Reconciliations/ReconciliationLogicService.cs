@@ -27,12 +27,29 @@ namespace ReconciliationApp.Service.Reconciliations
                 Titles = Month.January.ToList().ConvertAll(x=> new YearlyReconciliationGridTitleDto(x)),
             };
 
+            //this can be improve through projection. i am ignoring projection for simplicity
+            var incomeOrExpenses = await Context.IncomeOrExpenses.AsNoTracking()
+                .Where(x => x.Date.Year == year)
+                .Include(x => x.IncomeOrExpenseType).ToListAsync();
+
+            StatementBuilder.BuildIncomeStatement(grid, ref incomeOrExpenses);
+            StatementBuilder.BuildCumulativeIncomeStatement(grid);
+            StatementBuilder.BuildCostStatement(grid, ref incomeOrExpenses);
+            StatementBuilder.BuildCumulativeCostStatement(grid);
+            StatementBuilder.BuildStatementResult(grid);
+
+
+            #region Build Reconcilation Editable Grid
+
+            //this can be improve through projection. i am ignoring projection for simplicity
+            var incomeOrExpenseTypes = await Context.IncomeOrExpenseTypes.AsNoTracking().ToListAsync();
+            incomeOrExpenseTypes = incomeOrExpenseTypes.OrderBy(x => x.Flag).ThenBy(x => x.DisplayName).ToList();
+
+
+            //this can be improve through projection. i am ignoring projection for simplicity
             var reconciliations = await Context.Reconciliations.AsNoTracking()
                 .Where(x => x.Year == year)
                 .Include(x => x.IncomeOrExpenseType).ToListAsync();
-
-            var incomeOrExpenseTypes = await Context.IncomeOrExpenseTypes.AsNoTracking().ToListAsync();
-            incomeOrExpenseTypes = incomeOrExpenseTypes.OrderBy(x => x.Flag).ThenBy(x=> x.DisplayName).ToList();
 
             foreach (var type in incomeOrExpenseTypes)
             {
@@ -62,7 +79,12 @@ namespace ReconciliationApp.Service.Reconciliations
                 grid.Rows.Add(row);
             }
 
-            ReconciliationResultHelper.AddReconciliationResult(grid);
+            #endregion
+
+
+            ReconciliationBuilder.BuildReconciliationResult(grid);
+            ReconciliationBuilder.BuildReconciliationFinalResult(grid);
+            ReconciliationBuilder.BuildCumulativeFinalResult(grid);
 
             return grid;
         }

@@ -7,7 +7,7 @@ using ReconciliationApp.EntityFrameworkCore.IncomeOrExpenseTypes;
 
 namespace ReconciliationApp.EntityFrameworkCore.Seeds
 {
-    public static class IncomeOrExpenseBuilder
+    public static class IncomeOrExpenseSeedBuilder
     {
         public static void Build(ReconciliationDbContext context)
         {
@@ -17,13 +17,13 @@ namespace ReconciliationApp.EntityFrameworkCore.Seeds
 
             var types = context.IncomeOrExpenseTypes.AsNoTracking().ToList();
 
-            var incomeType1Id = types.First(x=> x.SystemName == IncomeOrExpenseTypeBuilder.IncomeType1).Id;
-            var incomeType2Id = types.First(x=> x.SystemName == IncomeOrExpenseTypeBuilder.IncomeType2).Id;
-            var incomeType3Id = types.First(x=> x.SystemName == IncomeOrExpenseTypeBuilder.IncomeType3).Id;
+            var incomeType1Id = types.First(x=> x.SystemName == IncomeOrExpenseTypeSeedBuilder.IncomeType1).Id;
+            var incomeType2Id = types.First(x=> x.SystemName == IncomeOrExpenseTypeSeedBuilder.IncomeType2).Id;
+            var incomeType3Id = types.First(x=> x.SystemName == IncomeOrExpenseTypeSeedBuilder.IncomeType3).Id;
 
-            var expenseType1Id = types.First(x => x.SystemName == IncomeOrExpenseTypeBuilder.ExpenseType1).Id;
-            var expenseType2Id = types.First(x => x.SystemName == IncomeOrExpenseTypeBuilder.ExpenseType2).Id;
-            var expenseType3Id = types.First(x => x.SystemName == IncomeOrExpenseTypeBuilder.ExpenseType3).Id;
+            var expenseType1Id = types.First(x => x.SystemName == IncomeOrExpenseTypeSeedBuilder.ExpenseType1).Id;
+            var expenseType2Id = types.First(x => x.SystemName == IncomeOrExpenseTypeSeedBuilder.ExpenseType2).Id;
+            var expenseType3Id = types.First(x => x.SystemName == IncomeOrExpenseTypeSeedBuilder.ExpenseType3).Id;
 
             var incomeOrExpenseTypes = new List<IncomeOrExpense>()
             {
