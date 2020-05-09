@@ -48,7 +48,14 @@ namespace ReconciliationApp.Web.Data
 
         public async Task EditAsync(ReconciliationFormDto model)
         {
-            await _reconciliationLogicService.EditAsync(model);
+            if (!string.IsNullOrWhiteSpace(model.Id))
+            {
+                await _reconciliationLogicService.EditAsync(model);
+            }
+            else
+            {
+                await CreateAsync(model);
+            }
         }
 
 

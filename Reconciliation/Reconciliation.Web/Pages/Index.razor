@@ -1,38 +1,90 @@
 ﻿@page "/"
-
-@inject IModalService Modal
+@using ReconciliationApp.Service.Reconciliations.Dtos
 @using ReconciliationApp.EntityFrameworkCore.IncomeOrExpenseTypes
 @using ReconciliationApp.Web.Data
-@using ReconciliationApp.Service.Reconciliations.Dtos
 
+@inject Sotsera.Blazor.Toaster.IToaster Toaster
+@inject IModalService Modal
 @inject ReconciliationService ReconciliationService
 
 
 @if (grid == null)
 {
-    <p><em>Loading...</em></p>
+    <p>
+        <em>Loading...</em>
+    </p>
 }
 else
 {
-    
     <table class='table table-striped table-hover table-bordered'>
         <thead>
-        <tr>
-            <th colspan="13" class="text-center">Year @grid.Year</th>
-        </tr>
-        <tr>
-            <th></th>
-            @foreach(var title in grid.Titles)
-            {
-                <th>@title.MonthDisplayName</th>
-            }            
-        </tr>
+            <tr>
+                <th colspan="13" class="text-center">Year @grid.Year</th>
+            </tr>
+            <tr>
+                <th></th>
+                @foreach (var title in grid.Titles)
+                {
+                    <th>@title.MonthDisplayName</th>
+                }
+            </tr>
         </thead>
         <tbody>
 
-        <!-- printing readonly statements -->
-        @foreach(var row in grid.Statements)
+            <!-- printing readonly statements -->
+            @foreach (var row in grid.Statements)
+            {
+                <tr class="table-secondary">
+                    <td>@row.Title</td>
+
+                    @foreach (var col in row.Values)
+                    {
+                        <td>@col.Amount</td>
+                    }
+                </tr>
+            }
+
+
+            <!-- printing reconciliation -->
+        <tr>
+            <th colspan="13" class="text-center">Reconciliation</th>
+        </tr>
+        @for (var rowIndex = 0; rowIndex < grid.Rows.Count; rowIndex++)
         {
+            int r = rowIndex;
+            var row = grid.Rows[rowIndex];
+            var tableClass = row.Flag == IncomeOrExpenseFlag.Income ? "table-success" : "table-danger";
+
+            <tr class="@tableClass">
+                <th>@row.IncomeOrExpenseTypeName</th>
+
+                @for (var colIndex = 0; colIndex < row.Columns.Count; colIndex++)
+                {
+                    int c = colIndex;
+                    var col = row.Columns[colIndex];
+
+                    if (!isEditing || isEditing && (editRowIndex!=r || editColIndex!=c))
+                    {
+                        <td @onclick="()=> EditCell(r, c)">@col.Amount</td>
+                    }
+                    else if (isEditing && editRowIndex == r && editColIndex == c)
+                    {
+                        <td>
+                            <EditForm Model="@col" OnValidSubmit="@(() => HandleValidSubmit(col))">
+                                <InputNumber class="form-control edit-input-size" title="Press enter to update" id="amount" @bind-Value="col.Amount" @onblur="ResetEdit"/>
+                            </EditForm>
+
+                        </td>
+                    }
+                }
+            </tr>
+        }
+
+
+            <!-- printing result -->        
+        @foreach (var row in grid.Results)
+        {
+            
             <tr class="table-secondary">
                 <td>@row.Title</td>
 
@@ -41,41 +93,9 @@ else
                     <td>@col.Amount</td>
                 }
             </tr>
-        }        
+        }
+            
 
-
-        <!-- printing reconciliation -->
-        <tr>
-            <th colspan="13" class="text-center">Reconciliation</th>
-        </tr>
-        @foreach(var row in grid.Rows)
-        {
-            var tableClass = row.Flag == IncomeOrExpenseFlag.Income ? "table-success" : "table-danger";
-
-            <tr class="@tableClass">
-                <td>@row.IncomeOrExpenseTypeName</td>
-
-                @foreach (var col in row.Columns)
-                {
-                    <td>@col.Amount</td>
-                }
-            </tr>
-        }    
-        
-
-        <!-- printing result -->
-            @foreach (var row in grid.Results)
-            {
-                <tr class="table-secondary">
-                    <th>@row.Title</th>
-
-                    @foreach (var col in row.Values)
-                    {
-                        <td>@col.Amount</td>
-                    }
-                </tr>
-            }
-    
         </tbody>
     </table>
 
@@ -91,11 +111,46 @@ else
 }
 
 @code {
-    private YearlyReconciliationGridDto grid;
+    private YearlyReconciliationGridDto grid;   
+    bool isEditing = false;
+    int? editRowIndex;
+    int? editColIndex;
 
     protected override async Task OnInitializedAsync()
     {
         grid = await ReconciliationService.GetYearlyTableAsync();
     }
-    
+
+    void EditCell(int rowIndex, int colIndex)
+    {
+        this.isEditing = true;
+        this.editRowIndex = rowIndex;
+        this.editColIndex = colIndex;
+    }
+
+    private async Task HandleValidSubmit(YearlyReconciliationGridColumnDto model)
+    {
+        var input = new ReconciliationFormDto();
+        input.Id = model.Id;
+        input.IncomeOrExpenseTypeId = model.IncomeOrExpenseTypeId;
+        input.Month = (int)model.Month;
+        input.Year = model.Year;
+        input.Amount = model.Amount.GetValueOrDefault();
+
+        await ReconciliationService.EditAsync(input);
+        Toaster.Success("Edited successfully");
+
+        ResetEdit();
+
+        await OnInitializedAsync();
+    }
+
+
+    void ResetEdit()
+    {
+        this.isEditing = false;
+        this.editRowIndex = null;
+        this.editColIndex = null;
+
+    }
 }

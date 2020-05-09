@@ -186,3 +186,11 @@ app {
 .blazored-modal-wrapper {
     width: 750px !important;
 }
+
+.pointer {
+    cursor: pointer;
+}
+
+.edit-input-size {
+    width: 80px !important;
+}
