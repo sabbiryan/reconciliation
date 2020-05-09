@@ -6,6 +6,15 @@ Simple project structure with two clients(will add more clients in future). Clie
 1. Reconciliation Table Grid
 2. Inline Table Cell Edit (Angular Client Only)
 
+### Technologies
+1. .Net Core 3.1
+2. Entity Framework Core 3.1.3
+3. AutoMapper 9.0.0
+4. Angualr 9
+5. Blazor
+6. Blazor.Modal 4.1.0
+7. Bootstrap 4
+
 ### Getting Start
 1. Clone the repository
 2. Open on visual studio(2019 recommended)
