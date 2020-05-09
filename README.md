@@ -1,4 +1,20 @@
-## Reconciliation
-My first blazor learning project
+### Project Structure
+<img src="https://github.com/sabbiryan/reconciliation/blob/master/Outputs/project-structure.png"/>
+Simple project structure with two clients(will add more clients in future). Clients depends on "ReconcciliationApp.Service" for request and response execution. Which is responsible for core business logics. This client projects are created using Visual Studio Project Templates
+
+### Getting Start
+1. Clone the repository
+2. Open on visual studio(2019 recommended)
+3. Select client Angular/Blazor and mark set as startup from visual studio solution explorer
+4. Open "appsettings.json" of the selected client project and update the connection string server name with yours. Default is SQLExpress, if your server name is like SQLExpress, you can ignore this step
+5. Run the project through Ctrl + F5 (if angular client is selected, for the very first time it will take some time to build and run for angular npm dependencies)
+6. No need to worry about the database, on the startup of the application, it will be created automatically, also insert some seed data as like the output. So you will get the output exactly same as output sample of a client
 
 
+### Reconciliation Outputs
+
+#### Angular Client
+<img src="https://github.com/sabbiryan/reconciliation/blob/master/Outputs/reconciliation.angular.home.png"/>
+
+#### Blazor Client
+<img src="https://github.com/sabbiryan/reconciliation/blob/master/Outputs/reconciliation.blazor.home.png"/>
