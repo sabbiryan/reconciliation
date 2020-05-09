@@ -4,7 +4,7 @@ Simple project structure with two clients(will add more clients in future). Clie
 
 ### Features
 1. Reconciliation Table Grid
-2. Inline Table Cell Edit
+2. Inline Table Cell Edit (Angular Client Only)
 
 ### Getting Start
 1. Clone the repository
