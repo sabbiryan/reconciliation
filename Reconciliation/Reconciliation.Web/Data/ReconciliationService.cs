@@ -12,28 +12,33 @@ namespace ReconciliationApp.Web.Data
 {
     public class ReconciliationService: EndpointServiceBase
     {
-        private readonly IReconciliationLogicService _reconciliationService;
-        public ReconciliationService(IReconciliationLogicService reconciliationService)
+        private readonly IReconciliationLogicService _reconciliationLogicService;
+        public ReconciliationService(IReconciliationLogicService reconciliationLogicService)
         {
-            _reconciliationService = reconciliationService;
+            _reconciliationLogicService = reconciliationLogicService;
         }
 
+        public async Task<YearlyReconciliationGridDto> GetYearlyTableAsync()
+        {
+            var reconciliations = await _reconciliationLogicService.GetReconciliationsAsync(2019);
+            return reconciliations;
+        }
 
         public async Task<ReconciliationListDto[]> GetListAsync()
         {
-            var result = await _reconciliationService.GetReconciliationsAsync();
+            var result = await _reconciliationLogicService.GetReconciliationsAsync();
             return result.ToArray();
         }
 
         public async Task CreateAsync(ReconciliationFormDto model)
         {
-            await _reconciliationService.CreateAsync(model);
+            await _reconciliationLogicService.CreateAsync(model);
         }
 
 
         public async Task<ReconciliationFormDto> GetForEditAsync(string id)
         {
-            var reconciliationDto = await _reconciliationService.GetAsync(id);
+            var reconciliationDto = await _reconciliationLogicService.GetAsync(id);
 
             var map = Mapper.Map<ReconciliationFormDto>(reconciliationDto);
 
@@ -43,13 +48,13 @@ namespace ReconciliationApp.Web.Data
 
         public async Task EditAsync(ReconciliationFormDto model)
         {
-            await _reconciliationService.EditAsync(model);
+            await _reconciliationLogicService.EditAsync(model);
         }
 
 
         public List<ComboBoxItemDto<int>> GetMonths()
         {
-            var list = _reconciliationService.GetMonths();
+            var list = _reconciliationLogicService.GetMonths();
 
             return list;
         }

@@ -1,50 +1,101 @@
 ﻿@page "/"
 
 @inject IModalService Modal
+@using ReconciliationApp.EntityFrameworkCore.IncomeOrExpenseTypes
 @using ReconciliationApp.Web.Data
 @using ReconciliationApp.Service.Reconciliations.Dtos
 
 @inject ReconciliationService ReconciliationService
 
-<h4>Yearly Summary</h4>
 
-<p>View yearly summary of income, expense and reconciliation.</p>
-
-@if (items == null)
+@if (grid == null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
-    <table class="table">
+    
+    <table class='table table-striped table-hover table-bordered'>
         <thead>
-            <tr>
-                <th>Date</th>
-                <th>Amount</th>
-                <th>Type</th>
-                <th>Flag</th>
-            </tr>
+        <tr>
+            <th colspan="13" class="text-center">Year @grid.Year</th>
+        </tr>
+        <tr>
+            <th></th>
+            @foreach(var title in grid.Titles)
+            {
+                <th>@title.MonthDisplayName</th>
+            }            
+        </tr>
         </thead>
         <tbody>
-            @foreach (var item in items)
+
+        <!-- printing readonly statements -->
+        @foreach(var row in grid.Statements)
+        {
+            <tr class="table-secondary">
+                <td>@row.Title</td>
+
+                @foreach (var col in row.Values)
+                {
+                    <td>@col.Amount</td>
+                }
+            </tr>
+        }        
+
+
+        <!-- printing reconciliation -->
+        <tr>
+            <th colspan="13" class="text-center">Reconciliation</th>
+        </tr>
+        @foreach(var row in grid.Rows)
+        {
+            var tableClass = row.Flag == IncomeOrExpenseFlag.Income ? "table-success" : "table-danger";
+
+            <tr class="@tableClass">
+                <td>@row.IncomeOrExpenseTypeName</td>
+
+                @foreach (var col in row.Columns)
+                {
+                    <td>@col.Amount</td>
+                }
+            </tr>
+        }    
+        
+
+        <!-- printing result -->
+            @foreach (var row in grid.Results)
             {
-                <tr>
-                    <td>@item.MonthDisplayText</td>
-                    <td>@item.Amount</td>
-                    <td>@item?.IncomeOrExpenseType?.DisplayName</td>
-                    <td>@item?.IncomeOrExpenseType?.FlagDisplayText</td>
+                <tr class="table-secondary">
+                    <th>@row.Title</th>
+
+                    @foreach (var col in row.Values)
+                    {
+                        <td>@col.Amount</td>
+                    }
                 </tr>
             }
+    
         </tbody>
     </table>
+
+    <div class="row mb-5">
+        <div class="col-12 text-center">
+            <span class="badge badge-secondary">Readonly</span>
+            &nbsp;&nbsp;
+            <span class="badge badge-success">Income</span>
+            &nbsp;&nbsp;
+            <span class="badge badge-danger">Expense</span>
+        </div>
+    </div>
 }
 
 @code {
-    private ReconciliationListDto[] items;
+    private YearlyReconciliationGridDto grid;
 
     protected override async Task OnInitializedAsync()
     {
-        items = await ReconciliationService.GetListAsync();
+        grid = await ReconciliationService.GetYearlyTableAsync();
     }
     
 }
