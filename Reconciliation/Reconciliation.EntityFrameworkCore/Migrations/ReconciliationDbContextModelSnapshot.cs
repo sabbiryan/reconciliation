@@ -116,9 +116,6 @@ namespace ReconciliationApp.EntityFrameworkCore.Migrations
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime?>("DeletionTime")
                         .HasColumnType("datetime2");
 
@@ -136,6 +133,9 @@ namespace ReconciliationApp.EntityFrameworkCore.Migrations
 
                     b.Property<DateTime?>("ModificationTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("Month")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

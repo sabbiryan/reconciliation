@@ -7,8 +7,8 @@ namespace ReconciliationApp.Service.Reconciliations
     public interface IReconciliationLogicService
     {
         Task<List<ReconciliationListDto>> GetReconciliationsAsync();
-        Task CreateAsync(ReconciliationCreateDto model);
+        Task CreateAsync(ReconciliationFormDto model);
         Task<ReconciliationDto> GetAsync(string id);
-        Task EditAsync(ReconciliationCreateDto model);
+        Task EditAsync(ReconciliationFormDto model);
     }
 }

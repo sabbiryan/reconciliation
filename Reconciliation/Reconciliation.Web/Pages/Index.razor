@@ -29,7 +29,7 @@ else
             @foreach (var item in items)
             {
                 <tr>
-                    <td>@item.Date.ToShortDateString()</td>
+                    <td>@item.MonthDisplayText</td>
                     <td>@item.Amount</td>
                     <td>@item?.IncomeOrExpenseType?.DisplayName</td>
                     <td>@item?.IncomeOrExpenseType?.FlagDisplayText</td>

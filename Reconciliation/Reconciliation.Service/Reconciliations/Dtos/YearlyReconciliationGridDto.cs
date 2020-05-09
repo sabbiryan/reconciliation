@@ -4,25 +4,18 @@ using ReconciliationApp.Shared.Dtos;
 
 namespace ReconciliationApp.Service.Reconciliations.Dtos
 {
-    public class YearlyReconciliationGridDto : DtoBase<string>
+    public class YearlyReconciliationGridDto
     {
         public string Year { get; set; }
 
-        
+        public string[] Months { get; set; }
+
     }
 
-    public class MonthlyIncomeOrExpenseDto
+    public class YearlyReconciliationGridCellDto
     {
-        public string Month { get; set; }
-
-        public decimal Income { get; set; }
-        public decimal CumulativeIncome { get; set; }
-
-
-        public decimal Expense { get; set; }
-        public decimal CumulativeExpense { get; set; }
-
-
-        public decimal Result { get; set; }
+        public string IncomeOrExpenseTypeId { get; set; }
+        public int Month { get; set; }
+        public decimal? Amount { get; set; }
     }
 }

@@ -25,7 +25,7 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Date</th>
+                <th>Month</th>
                 <th>Amount</th>
                 <th>Type</th>
                 <th>Flag</th>
@@ -36,7 +36,7 @@ else
             @foreach (var item in items)
             {
                 <tr>
-                    <td>@item.Date.ToShortDateString()</td>
+                    <td>@item.MonthDisplayText</td>
                     <td>@item.Amount</td>
                     <td>@item?.IncomeOrExpenseType?.DisplayName</td>
                     <td>@item?.IncomeOrExpenseType?.FlagDisplayText</td>
@@ -62,7 +62,7 @@ else
     async Task ShowModal(string id = null)
     {
         var parameters = new ModalParameters();
-        parameters.Add(nameof(ReconciliationCreateDto.Id), id);
+        parameters.Add(nameof(ReconciliationFormDto.Id), id);
 
         var formModal = Modal.Show<ReconciliationForm>(id == null ? "Create a new reconciliation" : "Edit reconciliation", parameters);
         var result = await formModal.Result;

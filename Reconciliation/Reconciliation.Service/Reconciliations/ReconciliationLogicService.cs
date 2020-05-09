@@ -25,7 +25,7 @@ namespace ReconciliationApp.Service.Reconciliations
             return map;
         }
 
-        public async Task CreateAsync(ReconciliationCreateDto model)
+        public async Task CreateAsync(ReconciliationFormDto model)
         {
             var reconciliation = Mapper.Map<Reconciliation>(model);
 
@@ -43,7 +43,7 @@ namespace ReconciliationApp.Service.Reconciliations
             return map;
         }
 
-        public async Task EditAsync(ReconciliationCreateDto model)
+        public async Task EditAsync(ReconciliationFormDto model)
         {
             var reconciliation = await Context.Reconciliations.FindAsync(model.Id);
 

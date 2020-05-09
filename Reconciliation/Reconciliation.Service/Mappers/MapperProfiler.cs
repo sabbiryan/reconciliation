@@ -23,9 +23,8 @@ namespace ReconciliationApp.Service.Mappers
 
             obj.CreateMap<Reconciliation, ReconciliationListDto>().ReverseMap();
             obj.CreateMap<Reconciliation, ReconciliationDto>().ReverseMap();
-            obj.CreateMap<Reconciliation, ReconciliationCreateDto>().ReverseMap();
-            obj.CreateMap<ReconciliationDto, ReconciliationCreateDto>().ReverseMap();
-            obj.CreateMap<Reconciliation, ReconciliationUpdateDto>().ReverseMap();
+            obj.CreateMap<Reconciliation, ReconciliationFormDto>().ReverseMap();
+            obj.CreateMap<ReconciliationDto, ReconciliationFormDto>().ReverseMap();
         }
 
 

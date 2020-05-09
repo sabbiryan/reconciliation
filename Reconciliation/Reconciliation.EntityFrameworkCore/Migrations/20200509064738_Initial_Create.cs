@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ReconciliationApp.EntityFrameworkCore.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Initial_Create : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -73,7 +73,7 @@ namespace ReconciliationApp.EntityFrameworkCore.Migrations
                     DeviceInfo = table.Column<string>(nullable: true),
                     IpAddress = table.Column<string>(nullable: true),
                     IncomeOrExpenseTypeId = table.Column<string>(nullable: true),
-                    Date = table.Column<DateTime>(nullable: false),
+                    Month = table.Column<int>(nullable: false),
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
