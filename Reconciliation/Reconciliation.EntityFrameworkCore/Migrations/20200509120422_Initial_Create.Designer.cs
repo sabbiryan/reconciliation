@@ -10,7 +10,7 @@ using ReconciliationApp.EntityFrameworkCore;
 namespace ReconciliationApp.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(ReconciliationDbContext))]
-    [Migration("20200509064738_Initial_Create")]
+    [Migration("20200509120422_Initial_Create")]
     partial class Initial_Create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -137,6 +137,9 @@ namespace ReconciliationApp.EntityFrameworkCore.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Month")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Year")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

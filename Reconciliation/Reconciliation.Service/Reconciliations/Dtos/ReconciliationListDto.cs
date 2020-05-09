@@ -13,6 +13,7 @@ namespace ReconciliationApp.Service.Reconciliations.Dtos
         public string IncomeOrExpenseTypeId { get; set; }
         public IncomeOrExpenseTypeDto IncomeOrExpenseType { get; set; }
 
+        public int Year { get; set; }
         public Month Month { get; set; }
         public string MonthDisplayText => Month.GetDescription();
 

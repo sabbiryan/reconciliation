@@ -18,6 +18,7 @@ namespace ReconciliationApp.EntityFrameworkCore.Seeds
 
             IncomeOrExpenseTypeBuilder.Build(context);
             IncomeOrExpenseBuilder.Build(context);
+            ReconciliationBuilder.Build(context);
         }
     }
 }

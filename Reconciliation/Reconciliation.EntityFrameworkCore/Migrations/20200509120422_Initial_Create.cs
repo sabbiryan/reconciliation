@@ -73,6 +73,7 @@ namespace ReconciliationApp.EntityFrameworkCore.Migrations
                     DeviceInfo = table.Column<string>(nullable: true),
                     IpAddress = table.Column<string>(nullable: true),
                     IncomeOrExpenseTypeId = table.Column<string>(nullable: true),
+                    Year = table.Column<int>(nullable: false),
                     Month = table.Column<int>(nullable: false),
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },

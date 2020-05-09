@@ -49,13 +49,7 @@ namespace ReconciliationApp.Web.Data
 
         public List<ComboBoxItemDto<int>> GetMonths()
         {
-            var months = Enum.GetValues(typeof(Month)).Cast<Month>().ToList();
-
-            var list = months.ConvertAll(x => new ComboBoxItemDto<int>()
-            {
-                Id = (int) x,
-                DisplayText = x.GetDescription()
-            });
+            var list = _reconciliationService.GetMonths();
 
             return list;
         }

@@ -137,6 +137,9 @@ namespace ReconciliationApp.EntityFrameworkCore.Migrations
                     b.Property<int>("Month")
                         .HasColumnType("int");
 
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("IncomeOrExpenseTypeId");

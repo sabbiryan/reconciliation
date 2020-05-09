@@ -12,6 +12,10 @@ namespace ReconciliationApp.Service.Reconciliations.Dtos
             Id = Guid.NewGuid().ToString();
         }
 
+        [Required(ErrorMessage = "Please enter a year")]
+        [Range(4, 4, ErrorMessage = "Please enter a full year like 2020")]
+        public int Year { get; set; } = DateTime.Now.Year;
+
         [Required(ErrorMessage = "Please select a month of reconciliation")]
         [Range(1, 12, ErrorMessage = "Please select a month of reconciliation")]
         public int Month { get; set; }
