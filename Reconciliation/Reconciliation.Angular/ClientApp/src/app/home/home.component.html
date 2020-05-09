@@ -24,10 +24,24 @@
     <tr>
       <th colspan="13" class="text-center">Reconciliation</th>
     </tr>
-    <tr *ngFor="let row of grid.rows" [ngClass]="{'table-success': row.flag==1, 'table-danger': row.flag==2}">
+    <tr *ngFor="let row of grid.rows; index as rowIndex;"
+      [ngClass]="{'table-success': row.flag==1, 'table-danger': row.flag==2}">
       <td>{{ row.incomeOrExpenseTypeName }}</td>
 
-      <td *ngFor="let col of row.columns">{{ col.amount }}</td>
+      <ng-container *ngFor="let col of row.columns; index as colIndex;">
+
+        <td (click)="editCell(rowIndex, colIndex)"
+          *ngIf="!isEditing || isEditing && (editingRow!=rowIndex || editingCol!=colIndex)" title="Click to edit"
+          class="pointer">{{ col.amount }}</td>
+
+        <td *ngIf="isEditing && editingRow==rowIndex  && editingCol==colIndex">
+          <form (ngSubmit)="saveOrUpdate(col)">
+            <input type="number" [(ngModel)]="col.amount" name="amount" (blur)="resetCell()" #amountInput title="Press enter to update" class="edit-input-size"/>
+          </form>
+        </td>
+
+      </ng-container>
+
     </tr>
 
 
@@ -37,7 +51,7 @@
 
       <th *ngFor="let col of row.values">{{ col.amount }}</th>
     </tr>
-    
+
   </tbody>
 </table>
 

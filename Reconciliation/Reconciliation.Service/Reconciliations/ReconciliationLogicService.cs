@@ -69,6 +69,7 @@ namespace ReconciliationApp.Service.Reconciliations
 
                     if (reconciliation != null)
                     {
+                        column.Id = reconciliation.Id;
                         column.Amount = reconciliation.Amount;
                         column.Flag = reconciliation.IncomeOrExpenseType.Flag;
                     }
@@ -102,6 +103,7 @@ namespace ReconciliationApp.Service.Reconciliations
 
         public async Task CreateAsync(ReconciliationFormDto model)
         {
+            if (string.IsNullOrWhiteSpace(model.Id)) model.Id = Guid.NewGuid().ToString();
             var reconciliation = Mapper.Map<Reconciliation>(model);
 
             var entityEntry = await Context.Reconciliations.AddAsync(reconciliation);

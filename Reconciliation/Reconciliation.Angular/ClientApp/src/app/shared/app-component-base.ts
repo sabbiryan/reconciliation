@@ -7,7 +7,7 @@ import * as $ from 'jquery';
 @Injectable()
 export abstract class AppComponentBase {
 
-    isLoading = false;
+    isSaving = false;
     date: Date = new Date();
 
 

@@ -48,6 +48,7 @@ namespace ReconciliationApp.Service.Reconciliations.Dtos
 
     public class YearlyReconciliationGridColumnDto
     {
+        public string Id { get; set; }
         public string IncomeOrExpenseTypeId { get; set; }
         public int Year { get; set; }
         public Month Month { get; set; }

@@ -21,6 +21,7 @@ export class YearlyReconciliationGridRowDto {
 }
 
 export class YearlyReconciliationGridColumnDto {
+    id: string;
     incomeOrExpenseTypeId: string;
     year: number;
     month: Month;

@@ -52,7 +52,14 @@ namespace ReconciliationApp.Angular.Controllers
         [HttpPut]
         public async Task Put([FromBody] ReconciliationFormDto form)
         {
-            await _reconciliationLogicService.EditAsync(form);
+            if (!string.IsNullOrWhiteSpace(form.Id))
+            {
+                await _reconciliationLogicService.EditAsync(form);
+            }
+            else
+            {
+                await Post(form);
+            }
         }
     }
 }
