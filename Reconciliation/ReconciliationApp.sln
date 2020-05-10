@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReconciliationApp.Service",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReconciliationApp.Shared", "Reconciliation.Shared\ReconciliationApp.Shared.csproj", "{278E454A-F494-4B74-8F35-F961D204E78B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReconciliationApp.Angular", "Reconciliation.Angular\ReconciliationApp.Angular.csproj", "{393F70AA-E341-4C3A-B606-C512BFCCB66A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReconciliationApp.Angular", "Reconciliation.Angular\ReconciliationApp.Angular.csproj", "{393F70AA-E341-4C3A-B606-C512BFCCB66A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReconciliationApp.React", "Reconciliation.React\ReconciliationApp.React.csproj", "{BB5D5353-35B5-407A-8BC8-765860B3F816}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{393F70AA-E341-4C3A-B606-C512BFCCB66A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{393F70AA-E341-4C3A-B606-C512BFCCB66A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{393F70AA-E341-4C3A-B606-C512BFCCB66A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB5D5353-35B5-407A-8BC8-765860B3F816}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB5D5353-35B5-407A-8BC8-765860B3F816}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB5D5353-35B5-407A-8BC8-765860B3F816}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB5D5353-35B5-407A-8BC8-765860B3F816}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
