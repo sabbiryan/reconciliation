@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 
 export class Home extends Component {
     static displayName = Home.name;
+    static isEditing = false;
+    static editRowIndex = undefined;
+    static editColIndex = undefined;
 
     constructor(props) {
         super(props);
@@ -26,8 +29,8 @@ export class Home extends Component {
     static renderReconciliationTableStatementsOrResults(statementsOrResults, className) {
         return (
             statementsOrResults.map((row, index) => {
-                return <tr className={className}>
-                    <td key={row.title}>{row.title}</td>
+                return <tr className={className} key={row.title}>
+                    <td>{row.title}</td>
                     {row.values.map(col => {
                         return <td key={col.month}>{col.amount}</td>
                     })}
@@ -36,13 +39,24 @@ export class Home extends Component {
         );
     }
 
+    static editCell(rowIndex, colIndex) {
+        this.isEditing = true;
+        this.rowIndex = rowIndex;
+        this.colIndex = colIndex;
+    }
+
     static renderReconciliationTableEditableRows(rows) {
         return (
-            rows.map((row, index) => {
-                return <tr className={row.flag == 1 ? 'table-success' : 'table-danger'}>
-                    <td key={row.incomeOrExpenseTypeName}>{row.incomeOrExpenseTypeName}</td>
-                    {row.columns.map(col => {
-                        return <td key={col.month}>{col.amount}</td>
+            rows.map((row, rowIndex) => {
+                return <tr key={row.incomeOrExpenseTypeName} className={row.flag == 1 ? 'table-success' : 'table-danger'}>
+                    <td>{row.incomeOrExpenseTypeName}</td>
+                    {row.columns.map((col, colIndex) => {
+                        if (!this.isEditing) {
+                            return <td key={col.month} title='Click to edit' onClick={() => this.editCell(rowIndex, colIndex)}>{col.amount}</td>
+
+                        } else if (this.isEditing) {
+                            return <input type='number' ></input>
+                        }
                     })}
                 </tr>
             })
@@ -85,13 +99,13 @@ export class Home extends Component {
                 {contents}
 
 
-                <div class="row mb-5">
-                    <div class="col-12 text-center">
-                        <span class="badge badge-secondary">Readonly</span>
+                <div className="row mb-5">
+                    <div className="col-12 text-center">
+                        <span className="badge badge-secondary">Readonly</span>
                         &nbsp;&nbsp;
-                        <span class="badge badge-success">Income</span>
+                        <span className="badge badge-success">Income</span>
                         &nbsp;&nbsp;
-                        <span class="badge badge-danger">Expense</span>
+                        <span className="badge badge-danger">Expense</span>
                     </div>
                 </div>
             </div>

@@ -101,7 +101,7 @@ namespace ReconciliationApp.Service.Reconciliations
             var costRow = grid.Statements.FirstOrDefault(x => x.Title == StatementConst.Cost);
             if (costRow == null) return;
 
-            var row = new YearlyReconciliationGridResultDto(StatementConst.CumulativeIncome, 3);
+            var row = new YearlyReconciliationGridResultDto(StatementConst.CumulativeCost, 3);
             for (var index = 0; index < grid.Titles.Count; index++)
             {
                 var title = grid.Titles[index];
