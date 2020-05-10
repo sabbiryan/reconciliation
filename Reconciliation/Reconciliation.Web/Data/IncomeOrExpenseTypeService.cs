@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using ReconciliationApp.Service.IncomeOrExpenseTypes;
 using ReconciliationApp.Service.IncomeOrExpenseTypes.Dtos;
 
-namespace ReconciliationApp.Web.Data
+namespace ReconciliationApp.Blazor.Data
 {
     public class IncomeOrExpenseTypeService
     {

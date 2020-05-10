@@ -1,7 +1,7 @@
 ﻿@page "/"
+@using ReconciliationApp.Blazor.Data
 @using ReconciliationApp.Service.Reconciliations.Dtos
 @using ReconciliationApp.EntityFrameworkCore.IncomeOrExpenseTypes
-@using ReconciliationApp.Web.Data
 
 @inject Sotsera.Blazor.Toaster.IToaster Toaster
 @inject IModalService Modal
@@ -16,6 +16,8 @@
 }
 else
 {
+    <h6 class="text-center">We are in Blazor App</h6>
+
     <table class='table table-striped table-hover table-bordered'>
         <thead>
             <tr>

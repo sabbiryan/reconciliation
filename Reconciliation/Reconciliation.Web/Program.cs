@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ReconciliationApp.EntityFrameworkCore.Seeds;
 
-namespace ReconciliationApp.Web
+namespace ReconciliationApp.Blazor
 {
     public class Program
     {

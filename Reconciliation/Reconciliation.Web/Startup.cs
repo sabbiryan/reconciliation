@@ -1,5 +1,3 @@
-using System.Reflection;
-using AutoMapper;
 using Blazored.Modal;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,14 +5,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ReconciliationApp.Blazor.Data;
 using ReconciliationApp.EntityFrameworkCore;
 using ReconciliationApp.Service.IncomeOrExpenses;
 using ReconciliationApp.Service.IncomeOrExpenseTypes;
 using ReconciliationApp.Service.Reconciliations;
-using ReconciliationApp.Web.Data;
 using Sotsera.Blazor.Toaster.Core.Models;
 
-namespace ReconciliationApp.Web
+namespace ReconciliationApp.Blazor
 {
     public class Startup
     {

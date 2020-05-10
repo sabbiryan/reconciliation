@@ -1,14 +1,10 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using ReconciliationApp.EntityFrameworkCore.Reconciliations;
 using ReconciliationApp.Service.Reconciliations;
 using ReconciliationApp.Service.Reconciliations.Dtos;
 using ReconciliationApp.Shared.Dtos;
-using ReconciliationApp.Shared.Extensions;
 
-namespace ReconciliationApp.Web.Data
+namespace ReconciliationApp.Blazor.Data
 {
     public class ReconciliationService: EndpointServiceBase
     {

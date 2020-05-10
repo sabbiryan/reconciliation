@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using ReconciliationApp.Service.IncomeOrExpenses;
 using ReconciliationApp.Service.IncomeOrExpenses.Dtos;
 
-namespace ReconciliationApp.Web.Data
+namespace ReconciliationApp.Blazor.Data
 {
     public class IncomeOrExpenseService
     {

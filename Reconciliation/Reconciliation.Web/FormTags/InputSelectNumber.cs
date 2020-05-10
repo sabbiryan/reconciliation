@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components.Forms;
+﻿using Microsoft.AspNetCore.Components.Forms;
 
-namespace ReconciliationApp.Web.FormTags
+namespace ReconciliationApp.Blazor.FormTags
 {
     public class InputSelectNumber<T> : InputSelect<T>
     {

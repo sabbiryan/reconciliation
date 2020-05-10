@@ -1,7 +1,7 @@
 using AutoMapper;
 using ReconciliationApp.Service.Mappers;
 
-namespace ReconciliationApp.Web.Data
+namespace ReconciliationApp.Blazor.Data
 {
     public abstract class EndpointServiceBase
     {
