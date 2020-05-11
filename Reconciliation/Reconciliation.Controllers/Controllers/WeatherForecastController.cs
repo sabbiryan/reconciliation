@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Reconciliation.React;
+using ReconciliationApp.Service.WeatherForecasts;
 
-namespace ReconciliationApp.React.Controllers
+namespace ReconciliationApp.Controllers.Controllers
 {
     public class WeatherForecastController : ApiControllerBase
     {

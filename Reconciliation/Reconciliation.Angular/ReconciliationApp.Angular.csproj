@@ -34,11 +34,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Reconciliation.Service\ReconciliationApp.Service.csproj" />
+    <Folder Include="ClientApp\src\app\home\models\dtos\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\src\app\home\models\dtos\" />
+    <ProjectReference Include="..\Reconciliation.Controllers\ReconciliationApp.Controllers.csproj" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

@@ -106,3 +106,4 @@ dist
 **/**/bin
 Reconciliation/.vs/
 **/**/PublishProfiles/FolderProfile.pubxml
+**/**/.vs/

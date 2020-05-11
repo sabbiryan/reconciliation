@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ReconciliationApp.Service.Mappers;
 
-namespace ReconciliationApp.React.Controllers
+namespace ReconciliationApp.Controllers.Controllers
 {
     [ApiController]
     [Route("[controller]")]

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using ReconciliationApp.Service.IncomeOrExpenseTypes;
 using ReconciliationApp.Service.IncomeOrExpenseTypes.Dtos;
 
-namespace ReconciliationApp.Angular.Controllers
+namespace ReconciliationApp.Controllers.Controllers
 {
     public class IncomeOrExpenseTypeController : ApiControllerBase
     {

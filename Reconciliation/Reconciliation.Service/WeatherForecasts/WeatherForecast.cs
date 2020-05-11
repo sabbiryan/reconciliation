@@ -1,6 +1,6 @@
 using System;
 
-namespace ReconciliationApp.Blazor.Data
+namespace ReconciliationApp.Service.WeatherForecasts
 {
     public class WeatherForecast
     {

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using ReconciliationApp.Service.IncomeOrExpenses;
 using ReconciliationApp.Service.IncomeOrExpenses.Dtos;
 
-namespace ReconciliationApp.React.Controllers
+namespace ReconciliationApp.Controllers.Controllers
 {
     public class IncomeOrExpenseController : ApiControllerBase
     {

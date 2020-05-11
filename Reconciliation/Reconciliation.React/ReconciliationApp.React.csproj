@@ -21,8 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Reconciliation.EntityFrameworkCore\ReconciliationApp.EntityFrameworkCore.csproj" />
-    <ProjectReference Include="..\Reconciliation.Service\ReconciliationApp.Service.csproj" />
+    <ProjectReference Include="..\Reconciliation.Controllers\ReconciliationApp.Controllers.csproj" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

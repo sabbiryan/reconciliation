@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 using ReconciliationApp.Service.Reconciliations;
 using ReconciliationApp.Service.Reconciliations.Dtos;
 
-namespace ReconciliationApp.Angular.Controllers
+namespace ReconciliationApp.Controllers.Controllers
 {
     public class ReconciliationController : ApiControllerBase
     {
