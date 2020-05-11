@@ -23,6 +23,7 @@ Simple project structure with two clients(will add more clients in future). Clie
 5. Blazor
 6. Blazor.Modal 4.1.0
 7. Bootstrap 4
+8. React 16.0.0
 
 ### Getting Start
 1. Clone the repository
