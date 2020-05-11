@@ -6,7 +6,7 @@ export class Home extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { grid: undefined, loading: true, isEditing: false, editRowIndex: undefined, editColIndex: undefined, editAmount: undefined };
+        this.state = { grid: undefined, loading: true, isEditing: false, cell: undefined, editRowIndex: undefined, editColIndex: undefined, editAmount: undefined };
 
         this.handleEditCellClick = this.handleCellEditClick.bind(this);
         this.handleResetCellEditClick = this.handleResetCellEditClick.bind(this);
@@ -21,12 +21,13 @@ export class Home extends Component {
     }
 
 
-    handleCellEditClick(event) {
+    handleCellEditClick(cell, rowIndex, colIndex) {
         this.setState({
             isEditing: true,
-            editRowIndex: event.target.dataset.rowIndex,
-            editColIndex: event.target.dataset.colIndex,
-            editAmount: event.target.dataset.editAmount,
+            cell: cell,
+            editRowIndex: rowIndex,
+            editColIndex: colIndex,
+            editAmount: cell.amount,
         });
     }
 
@@ -37,11 +38,12 @@ export class Home extends Component {
 
 
     handleChange(event) {
-        this.setState({ cell: event.target.value });
+        this.setState({ editAmount: event.target.value });
     }
 
     handleSubmit(event) {
-        alert('A name was submitted: ' + this.state.cellValue);
+        this.updateReconciliationCell();
+        this.handleResetCellEditClick();
         event.preventDefault();
     }
 
@@ -155,11 +157,30 @@ export class Home extends Component {
         this.setState({ grid: data, loading: false });
     }
 
+    async updateReconciliationCell() {
+
+        let cell = this.state.cell;
+        cell.amount = +this.state.editAmount;
+
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(cell)
+        };
+
+        //this.setState({ loading: true });
+        const response = await fetch('reconciliation', requestOptions);
+        //await response.json();
+        //this.setState({ loading: false });
+
+        await this.populateReconciliationGrid();
+    }
+
 }
 
 function ViewTableCell(props) {
     return (
-        <td title='Click to edit' onClick={props.tdOnClick} data-row-index={props.rowIndex} data-col-index={props.colIndex} data-edit-amount={props.col.amount}>{props.col.amount}</td>
+        <td className='pointer' title='Click to edit' onClick={() => props.tdOnClick(props.col, props.rowIndex, props.colIndex)}>{props.col.amount}</td>
     )
 }
 
@@ -167,7 +188,7 @@ function FormTableCell(props) {
     return (
         <td>
             <form onSubmit={props.formOnSubmit}>
-                <input type="text" value={props.state.editAmount} onChange={props.formOnChange} onBlur={props.formOnBlur} required />
+                <input className='edit-input-size' title='Press enter to update' type="text" value={props.state.editAmount} onChange={props.formOnChange} onBlur={props.formOnBlur} required />
             </form>
         </td>
     )
