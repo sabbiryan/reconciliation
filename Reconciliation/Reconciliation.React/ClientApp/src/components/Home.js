@@ -6,7 +6,7 @@ export class Home extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { grid: undefined, loading: true, isEditing: false, editRowIndex: undefined, editColIndex: undefined, cell: undefined };
+        this.state = { grid: undefined, loading: true, isEditing: false, editRowIndex: undefined, editColIndex: undefined, editAmount: undefined };
 
         this.handleEditCellClick = this.handleCellEditClick.bind(this);
         this.handleResetCellEditClick = this.handleResetCellEditClick.bind(this);
@@ -22,21 +22,26 @@ export class Home extends Component {
 
 
     handleCellEditClick(event) {
-        this.setState({ isEditing: true });
+        this.setState({
+            isEditing: true,
+            editRowIndex: event.target.dataset.rowIndex,
+            editColIndex: event.target.dataset.colIndex,
+            editAmount: event.target.dataset.editAmount,
+        });
     }
 
     handleResetCellEditClick(event) {
         this.setState({ isEditing: false });
     }
 
-    
+
 
     handleChange(event) {
         this.setState({ cell: event.target.value });
     }
 
     handleSubmit(event) {
-        alert('A name was submitted: ' + this.state.cell);
+        alert('A name was submitted: ' + this.state.cellValue);
         event.preventDefault();
     }
 
@@ -73,13 +78,14 @@ export class Home extends Component {
                     {row.columns.map((col, colIndex) => {
 
                         let props = {
+                            rowIndex: rowIndex,
+                            colIndex: colIndex,
                             col: col,
                             tdOnClick: self.handleEditCellClick,
                             formOnSubmit: self.handleSubmit,
                             formOnChange: self.handleChange,
                             formOnBlur: self.handleResetCellEditClick,
-                            cellState: self.state.cell,
-                            isEditingState: self.state.isEditing,
+                            state: self.state,
                         };
 
                         return <EditableTableCell key={col.month} {...props} />
@@ -153,7 +159,7 @@ export class Home extends Component {
 
 function ViewTableCell(props) {
     return (
-        <td title='Click to edit' onClick={props.tdOnClick}>{props.col.amount}</td>
+        <td title='Click to edit' onClick={props.tdOnClick} data-row-index={props.rowIndex} data-col-index={props.colIndex} data-edit-amount={props.col.amount}>{props.col.amount}</td>
     )
 }
 
@@ -161,14 +167,14 @@ function FormTableCell(props) {
     return (
         <td>
             <form onSubmit={props.formOnSubmit}>
-                <input type="text" value={props.cellState} onChange={props.formOnChange} onBlur={props.formOnBlur} required />
+                <input type="text" value={props.editAmount} onChange={props.formOnChange} onBlur={props.formOnBlur} required />
             </form>
         </td>
     )
 }
 
 function EditableTableCell(props) {
-    const isView = !props.isEditingState;
+    const isView = !props.state.isEditing || props.state.isEditing && (+props.state.editRowIndex != props.rowIndex || +props.state.editColIndex != props.colIndex);
     if (isView) {
         return <ViewTableCell {...props} />;
     }
