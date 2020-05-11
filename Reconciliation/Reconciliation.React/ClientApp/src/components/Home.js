@@ -167,7 +167,7 @@ function FormTableCell(props) {
     return (
         <td>
             <form onSubmit={props.formOnSubmit}>
-                <input type="text" value={props.editAmount} onChange={props.formOnChange} onBlur={props.formOnBlur} required />
+                <input type="text" value={props.state.editAmount} onChange={props.formOnChange} onBlur={props.formOnBlur} required />
             </form>
         </td>
     )
