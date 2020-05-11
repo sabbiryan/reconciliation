@@ -1,6 +1,6 @@
 ### Project Structure
 <img src="https://github.com/sabbiryan/reconciliation/blob/master/Outputs/project-structure.png"/>
-Simple project structure with two clients(will add more clients in future). Clients depends on "ReconcciliationApp.Service" for request and response execution. Which is responsible for core business logics. This client projects are created using Visual Studio Project Templates
+Simple project structure with several clients. Clients depends on "ReconcciliationApp.Service" for request and response execution. Which is responsible for core business logics. This client projects are created using Visual Studio Project Templates
 
 ### Newly Added
 1. Recondiliation grid render to react client app
