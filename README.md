@@ -4,9 +4,11 @@ Simple project structure with two clients(will add more clients in future). Clie
 
 ### Newly Added
 1. Recondiliation grid render to react client app
+2. Edit inline table cell from react app
 
 ### Upcomming 
-1. Edit inline table cell 
+1. Recondiliation grid render to vue client app
+2. Edit inline table cell from vue app
 
 ### Features
 1. Reconciliation table grid
