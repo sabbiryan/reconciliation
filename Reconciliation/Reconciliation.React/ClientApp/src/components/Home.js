@@ -1,18 +1,43 @@
 import React, { Component } from 'react';
 
+
 export class Home extends Component {
     static displayName = Home.name;
-    static isEditing = false;
-    static editRowIndex = undefined;
-    static editColIndex = undefined;
 
     constructor(props) {
         super(props);
-        this.state = { grid: undefined, loading: true };
+        this.state = { grid: undefined, loading: true, isEditing: false, editRowIndex: undefined, editColIndex: undefined, cell: undefined };
+
+        this.handleEditCellClick = this.handleCellEditClick.bind(this);
+        this.handleResetCellEditClick = this.handleResetCellEditClick.bind(this);
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+
     componentDidMount() {
-        this.populateWeatherData();
+        this.populateReconciliationGrid();
+    }
+
+
+    handleCellEditClick(event) {
+        this.setState({ isEditing: true });
+    }
+
+    handleResetCellEditClick(event) {
+        this.setState({ isEditing: false });
+    }
+
+    
+
+    handleChange(event) {
+        this.setState({ cell: event.target.value });
+    }
+
+    handleSubmit(event) {
+        alert('A name was submitted: ' + this.state.cell);
+        event.preventDefault();
     }
 
 
@@ -39,24 +64,25 @@ export class Home extends Component {
         );
     }
 
-    static editCell(rowIndex, colIndex) {
-        this.isEditing = true;
-        this.rowIndex = rowIndex;
-        this.colIndex = colIndex;
-    }
+    static renderReconciliationTableEditableRows(rows, self) {
 
-    static renderReconciliationTableEditableRows(rows) {
         return (
             rows.map((row, rowIndex) => {
                 return <tr key={row.incomeOrExpenseTypeName} className={row.flag == 1 ? 'table-success' : 'table-danger'}>
                     <td>{row.incomeOrExpenseTypeName}</td>
                     {row.columns.map((col, colIndex) => {
-                        if (!this.isEditing) {
-                            return <td key={col.month} title='Click to edit' onClick={() => this.editCell(rowIndex, colIndex)}>{col.amount}</td>
 
-                        } else if (this.isEditing) {
-                            return <input type='number' ></input>
-                        }
+                        let props = {
+                            col: col,
+                            tdOnClick: self.handleEditCellClick,
+                            formOnSubmit: self.handleSubmit,
+                            formOnChange: self.handleChange,
+                            formOnBlur: self.handleResetCellEditClick,
+                            cellState: self.state.cell,
+                            isEditingState: self.state.isEditing,
+                        };
+
+                        return <EditableTableCell key={col.month} {...props} />
                     })}
                 </tr>
             })
@@ -64,7 +90,7 @@ export class Home extends Component {
     }
 
 
-    static renderReconciliationTable(grid) {
+    static renderReconciliationTable(grid, self) {
         return (
             <table className='table table-striped table-bordered' aria-labelledby="tabelLabel">
                 <thead>
@@ -80,7 +106,7 @@ export class Home extends Component {
                 <tbody>
                     {Home.renderReconciliationTableStatementsOrResults(grid.statements, 'table-secondary')}
 
-                    {Home.renderReconciliationTableEditableRows(grid.rows)}
+                    {Home.renderReconciliationTableEditableRows(grid.rows, self)}
 
                     {Home.renderReconciliationTableStatementsOrResults(grid.results, 'table-warning')}
                 </tbody>
@@ -89,13 +115,15 @@ export class Home extends Component {
     }
 
     render() {
+
         let contents = this.state.loading
             ? <p><em>Loading...</em></p>
-            : Home.renderReconciliationTable(this.state.grid);
+            : Home.renderReconciliationTable(this.state.grid, this);
 
         return (
             <div>
                 <h6 id="tabelLabel" className="text-center">We are in React App</h6>
+
                 {contents}
 
 
@@ -112,11 +140,37 @@ export class Home extends Component {
 
 
         );
+
     }
 
-    async populateWeatherData() {
+    async populateReconciliationGrid() {
         const response = await fetch('reconciliation/yearly-table');
         const data = await response.json();
         this.setState({ grid: data, loading: false });
     }
+
+}
+
+function ViewTableCell(props) {
+    return (
+        <td title='Click to edit' onClick={props.tdOnClick}>{props.col.amount}</td>
+    )
+}
+
+function FormTableCell(props) {
+    return (
+        <td>
+            <form onSubmit={props.formOnSubmit}>
+                <input type="text" value={props.cellState} onChange={props.formOnChange} onBlur={props.formOnBlur} required />
+            </form>
+        </td>
+    )
+}
+
+function EditableTableCell(props) {
+    const isView = !props.isEditingState;
+    if (isView) {
+        return <ViewTableCell {...props} />;
+    }
+    return <FormTableCell {...props} />;
 }
