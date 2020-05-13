@@ -70,6 +70,8 @@ namespace ReconciliationApp.React
 
             app.UseRouting();
 
+            app.UseCors();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
