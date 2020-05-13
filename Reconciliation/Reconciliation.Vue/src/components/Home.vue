@@ -22,13 +22,34 @@
             </tr>
 
             <tr
-              v-for="row in grid.rows"
+              v-for="(row, rowIndex) in grid.rows"
               :key="row.month"
               v-bind:class="{ 'table-success': row.flag==1, 'table-danger': row.flag==2, }"
             >
               <td>{{row.incomeOrExpenseTypeName}}</td>
 
-              <td v-for="col in row.columns" :key="col.month" @click>{{col.amount}}</td>
+              <td
+                v-for="(col, colIndex) in row.columns"
+                :key="col.month"
+                @click="editCell(rowIndex, colIndex)"
+              >
+                <span
+                  v-if="!isEditing || isEditing && (editingRowIndex!=rowIndex || editingColIndex!=colIndex)"
+                  class="pointer"
+                >{{col.amount}}</span>
+
+                <span v-if="isEditing && editingRowIndex==rowIndex && editingColIndex==colIndex">
+                  <input
+                    class="input-size"
+                    autofocus
+                    autocomplete="off"
+                    placeholder="Amount"
+                    v-model="col.amount"
+                    @keyup.enter="update(col)"
+                    @blur="clearCell()"
+                  />
+                </span>
+              </td>
             </tr>
 
             <tr v-for="row in grid.results" :key="row.month" class="table-secondary">
@@ -54,19 +75,22 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { YearlyReconciliationGridDto } from "../models/dtos/yearly-reconsiliation-grid-dto.model";
-import { AxiosResponse } from "axios";
+import {
+  YearlyReconciliationGridDto,
+  YearlyReconciliationGridColumnDto
+} from "../models/dtos/yearly-reconsiliation-grid-dto.model";
+import Axios, { AxiosResponse } from "axios";
 
 @Component
 export default class Home extends Vue {
   @Prop() private grid: YearlyReconciliationGridDto | undefined;
-  @Prop() private inEditing: boolean | undefined;
+  @Prop() private isEditing: boolean | undefined;
   @Prop() private editingRowIndex: number | undefined;
   @Prop() private editingColIndex: number | undefined;
 
   constructor() {
     super();
-
+    this.grid = new YearlyReconciliationGridDto();
     this.getAll();
   }
 
@@ -81,12 +105,36 @@ export default class Home extends Vue {
   }
 
   editCell(rowIndex: number, colIndex: number) {
-    this.inEditing = true;
+    this.isEditing = true;
     this.editingRowIndex = rowIndex;
     this.editingColIndex = colIndex;
+  }
+
+  clearCell() {
+    this.isEditing = false;
+    this.editingRowIndex = undefined;
+    this.editingColIndex = undefined;
+  }
+
+  update(item: YearlyReconciliationGridColumnDto) {
+    Vue.axios
+      .put("http://localhost:49660/reconciliation", item)
+      .then(response => {
+        this.getAll();
+        this.clearCell();
+      });
   }
 }
 </script>
 
 <style scoped>
+.pointer {
+  cursor: pointer;
+  width: 100%;
+  display: block;
+}
+
+.input-size {
+  width: 80px !important;
+}
 </style>
