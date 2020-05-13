@@ -2,17 +2,9 @@
 <img src="https://github.com/sabbiryan/reconciliation/blob/master/Outputs/project-structure.png"/>
 Simple project structure with several clients. Clients depends on "ReconcciliationApp.Service" for request and response execution. Which is responsible for core business logics. This client projects are created using Visual Studio Project Templates
 
-### Newly Added
-1. Recondiliation grid render to react client app
-2. Edit inline table cell from react app
-
-### Upcomming 
-1. Recondiliation grid render to vue client app
-2. Edit inline table cell from vue app
-
 ### Features
 1. Reconciliation table grid
-2. Inline table cell edit (angular & blazor)
+2. Inline table cell edit (angular, blazor, react, vue)
 3. On startup database table delete all rows and ensure tabels has only seed data
 
 ### Technologies
@@ -44,3 +36,6 @@ Simple project structure with several clients. Clients depends on "Reconcciliati
 
 #### React Client
 <img src="https://github.com/sabbiryan/reconciliation/blob/master/Outputs/reconciliation.react.home.png"/>
+
+#### Vue Client
+<img src="https://github.com/sabbiryan/reconciliation/blob/master/Outputs/reconciliation.vue.home.png"/>
