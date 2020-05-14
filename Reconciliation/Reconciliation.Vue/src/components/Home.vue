@@ -83,10 +83,10 @@ import Axios, { AxiosResponse } from "axios";
 
 @Component
 export default class Home extends Vue {
-  @Prop() private grid: YearlyReconciliationGridDto | undefined;
+  public grid: YearlyReconciliationGridDto | undefined;
   @Prop() private isEditing: boolean | undefined;
-  @Prop() private editingRowIndex: number | undefined;
-  @Prop() private editingColIndex: number | undefined;
+  public editingRowIndex: number | undefined;
+  public editingColIndex: number | undefined;
 
   constructor() {
     super();
